@@ -65,7 +65,10 @@ const TICKER = [
   "READY KREDIT", "TUKAR TAMBAH", "MOTOR BEKAS BERKUALITAS", "GARANSI MESIN", "SIAP ANTAR",
 ];
 
-export default function Hero() {
+export default function Hero({ booted = false }: { booted?: boolean }) {
+  // Saat preloader tampil (booted=false) animasi berjalan sesuai jadwal asli;
+  // saat kembali dari halaman lain (booted=true) animasi langsung tanpa delay.
+  const d = (base: number) => (booted ? base : base + 2.2);
   return (
     <section id="beranda" className="relative flex min-h-screen flex-col overflow-hidden bg-[#0b0b0d]">
       {/* Latar */}
@@ -85,7 +88,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.2, duration: 0.6 }}
+            transition={{ delay: d(0), duration: 0.6 }}
             className="mb-5 inline-flex items-center gap-2 rounded-full border border-[#e11d2e]/40 bg-[#e11d2e]/10 px-4 py-1.5 text-xs font-medium tracking-wide text-[#ff6b78]"
           >
             <Flame className="h-3.5 w-3.5 animate-blink" />
@@ -98,11 +101,11 @@ export default function Hero() {
                 <motion.span
                   initial={{ y: "110%" }}
                   animate={{ y: 0 }}
-                  transition={{ delay: 2.3 + i * 0.15, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: d(0.1 + i * 0.15), duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                   className={
                     i === 0
                       ? "block bg-gradient-to-r from-[#ff4d5a] via-[#e11d2e] to-[#8f0f1a] bg-clip-text text-7xl font-bold tracking-wide text-transparent animate-gradient-x md:text-8xl xl:text-9xl"
-                      : "text-stroke block text-7xl font-bold tracking-wide md:text-8xl xl:text-9xl"
+                      : "text-glow-white animate-glow-white block text-7xl font-bold tracking-wide md:text-8xl xl:text-9xl"
                   }
                 >
                   {word}
@@ -111,11 +114,25 @@ export default function Hero() {
             ))}
           </h1>
 
+          <motion.div
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: d(0.45), duration: 0.6 }}
+            className="mt-5"
+          >
+            <p className="font-display text-sm font-bold uppercase tracking-[0.22em] text-[#f59e0b] md:text-base">
+              JURAGAN MOTOR TERLENGKAP TASIKMALAYA
+            </p>
+            <p className="mt-1 text-xs font-medium tracking-wider text-white/50 md:text-sm">
+              Jawa Barat — Indonesia · {SITE.brandingLong}
+            </p>
+          </motion.div>
+
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.65, duration: 0.6 }}
-            className="mt-5 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
+            transition={{ delay: d(0.6), duration: 0.6 }}
+            className="mt-4 max-w-xl text-base leading-relaxed text-white/65 md:text-lg"
           >
             Dealer motor <strong className="text-white">baru & bekas</strong> paling terpercaya di
             Tasikmalaya. Harga pasar transparan, unit terverifikasi, kredit cair cepat, dan tukar
@@ -125,7 +142,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.8, duration: 0.6 }}
+            transition={{ delay: d(0.75), duration: 0.6 }}
             className="mt-7 flex flex-wrap items-center gap-3"
           >
             <a
@@ -149,13 +166,13 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 3.0, duration: 0.7 }}
+            transition={{ delay: d(0.95), duration: 0.7 }}
             className="mt-9 grid max-w-lg grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur"
           >
             {[
               { v: "50+", l: "Unit Ready" },
               { v: "9", l: "Merk Tersedia" },
-              { v: "4.9", l: "Rating Google" },
+              { v: "2020", l: "Berdiri Sejak" },
             ].map((s) => (
               <div key={s.l} className="px-4 py-3 text-center">
                 <div className="font-display text-2xl font-bold text-[#f59e0b]">{s.v}</div>
@@ -169,7 +186,7 @@ export default function Hero() {
         <motion.div
           initial={{ opacity: 0, x: 60 }}
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 2.5, duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ delay: d(0.4), duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
           className="relative hidden lg:block"
         >
           <div className="absolute left-1/2 top-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e11d2e]/25 blur-[90px] animate-glow" />
@@ -185,7 +202,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 3.2 }}
+            transition={{ delay: d(1.0) }}
             className="absolute -left-2 top-6 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#141417]/90 px-4 py-2.5 shadow-xl backdrop-blur animate-float-slow"
           >
             <ShieldCheck className="h-5 w-5 text-[#f59e0b]" />
@@ -197,13 +214,13 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.6 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 3.4 }}
+            transition={{ delay: d(1.15) }}
             className="absolute -right-2 bottom-10 z-20 flex items-center gap-2 rounded-2xl border border-white/15 bg-[#141417]/90 px-4 py-2.5 shadow-xl backdrop-blur animate-float"
           >
             <MapPin className="h-5 w-5 text-[#e11d2e]" />
             <div className="text-left">
-              <div className="text-xs font-bold text-white">Griya Mangkubumi</div>
-              <div className="text-[10px] text-white/55">Jl. A.H. Nasution No.1</div>
+              <div className="text-xs font-bold text-white">Lokasi Terbaik Tasikmalaya</div>
+              <div className="text-[10px] text-white/55">Pintu masuk Griya Asri Mangkubumi Indah</div>
             </div>
           </motion.div>
         </motion.div>
@@ -229,7 +246,7 @@ export default function Hero() {
         aria-label="Gulir ke bawah"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 3.6 }}
+        transition={{ delay: d(1.3) }}
         className="absolute bottom-20 left-1/2 z-20 hidden -translate-x-1/2 md:block"
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ repeat: Infinity, duration: 1.6 }}>

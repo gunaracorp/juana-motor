@@ -7,12 +7,17 @@ export const SITE = {
   name: "Juana Motor",
   legalName: "Showroom Motor Mulya Juana Tasikmalaya",
   owner: "Ujang Juana",
-  tagline: "Dealer Motor Terpercaya Tasikmalaya",
+  tagline: "Juragan Motor Terlengkap Tasikmalaya, Jawa Barat - Indonesia",
+  brandingLong:
+    "Pusat Jual Beli Motor Terbaik, Terlengkap dan Terpercaya Sejak Tahun 2020",
   slogan: "Baru Mulus, Bekas Pasti Berkualitas",
+  since: 2020,
   nib: "1006240019347",
   nibIssued: "10 Juni 2024",
   kbli: "47831 - Perdagangan Eceran Sepeda Motor Baru",
   email: "prabudanling@gmail.com",
+  whatsapp: "6281387685252",
+  whatsappDisplay: "+62 813-8768-5252",
   address: {
     line1: "Ruko Perumahan Griya Mangkubumi Indah No. 1",
     street: "Jl. A.H. Nasution",
@@ -22,6 +27,9 @@ export const SITE = {
     province: "Jawa Barat",
     zip: "46181",
     full: "Ruko Griya Mangkubumi Indah No.1, Jl. A.H. Nasution, Kel. Cipari, Kec. Mangkubumi, Kota Tasikmalaya, Jawa Barat 46181",
+    landmark:
+      "Tepat di pintu masuk Perum Griya Asri Mangkubumi Indah - Cipari, Tasikmalaya",
+    landmarkShort: "Pintu Masuk Perum Griya Asri Mangkubumi Indah",
   },
   coordinates: {
     lat: -7.345583333,
@@ -38,8 +46,13 @@ export const SITE = {
     { day: "Sabtu - Minggu", time: "08.00 - 21.00 WIB" },
     { day: "Hari Libur Nasional", time: "09.00 - 17.00 WIB" },
   ],
-  // GANTI dengan nomor WhatsApp aktif showroom (format 62xxx tanpa + dan tanpa 0 di depan)
-  whatsapp: "6281234567890",
+};
+
+export const CREDITS = {
+  design: "Design by digiman.id — PT Digital Bisnis Manajemen",
+  designUrl: "https://digiman.id",
+  license: "Licensing by PT Top Konsultan Internasional — topkonsultan.web.id",
+  licenseUrl: "https://topkonsultan.web.id",
 };
 
 export const BRANDS = [

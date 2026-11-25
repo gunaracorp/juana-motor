@@ -113,6 +113,43 @@
   color: transparent;
 }
 
+/* Teks putih bersinar (MOTOR) — aura putih berdenyut lembut */
+.text-glow-white {
+  color: #ffffff;
+  text-shadow:
+    0 0 8px rgba(255, 255, 255, 0.85),
+    0 0 22px rgba(255, 255, 255, 0.55),
+    0 0 48px rgba(255, 255, 255, 0.3),
+    0 0 90px rgba(255, 255, 255, 0.18);
+}
+@keyframes jm-glow-white {
+  0%, 100% {
+    text-shadow:
+      0 0 8px rgba(255, 255, 255, 0.85),
+      0 0 22px rgba(255, 255, 255, 0.55),
+      0 0 48px rgba(255, 255, 255, 0.3),
+      0 0 90px rgba(255, 255, 255, 0.18);
+  }
+  50% {
+    text-shadow:
+      0 0 12px rgba(255, 255, 255, 1),
+      0 0 34px rgba(255, 255, 255, 0.75),
+      0 0 70px rgba(255, 255, 255, 0.45),
+      0 0 130px rgba(255, 255, 255, 0.28);
+  }
+}
+.animate-glow-white { animation: jm-glow-white 3.2s ease-in-out infinite; }
+
+/* Strip judul halaman virtual */
+.page-hero-grid {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 30%, transparent 100%);
+}
+
 .text-stroke-red {
   -webkit-text-stroke: 1.5px oklch(0.62 0.26 27.5);
   color: transparent;

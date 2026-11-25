@@ -3,12 +3,12 @@
 import { motion } from "framer-motion";
 import {
   MapPin, Clock, Mail, Phone, BadgeCheck, ExternalLink, ChevronUp,
-  Navigation, Building2, Bike,
+  Navigation, Building2, Bike, MessageCircle,
 } from "lucide-react";
 import {
   Accordion, AccordionContent, AccordionItem, AccordionTrigger,
 } from "@/components/ui/accordion";
-import { SITE, waLink, LEASING_PARTNERS } from "@/config/site";
+import { SITE, CREDITS, waLink, LEASING_PARTNERS } from "@/config/site";
 
 /* ================= LOKASI ================= */
 export function Location() {
@@ -22,7 +22,8 @@ export function Location() {
             SHOWROOM <span className="text-stroke-red">KAMI</span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-white/60 md:text-base">
-            Mudah dijangkau dari mana saja di Tasikmalaya — tepat di Jl. A.H. Nasution, Mangkubumi.
+            Lokasi showroom terbaik di Tasikmalaya — tepat di pintu masuk Perum Griya Asri Mangkubumi Indah — Cipari,
+            mudah dijangkau dari seluruh kota via Jl. A.H. Nasution.
           </p>
         </motion.div>
 
@@ -44,6 +45,9 @@ export function Location() {
                 <div>
                   <h3 className="font-semibold text-white">Alamat Showroom</h3>
                   <p className="mt-1 text-sm leading-relaxed text-white/65">{SITE.address.full}</p>
+                  <p className="mt-2 rounded-xl border border-[#f59e0b]/25 bg-[#f59e0b]/10 px-3 py-2 text-xs font-medium text-[#f59e0b]">
+                    {SITE.address.landmark}
+                  </p>
                 </div>
               </div>
               <div className="mt-4 flex items-start gap-3 border-t border-white/10 pt-4">
@@ -144,6 +148,14 @@ export function FAQ() {
               </AccordionItem>
             ))}
           </Accordion>
+          <div className="mt-8 text-center">
+            <a
+              href="#/faq"
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3 text-sm font-semibold text-white transition hover:border-[#e11d2e]/50 hover:bg-[#e11d2e]/10"
+            >
+              Lihat Halaman FAQ Lengkap <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -225,6 +237,10 @@ export function Footer() {
               <span className="block text-[10px] font-normal tracking-[0.3em] text-white/50">TASIKMALAYA</span>
             </span>
           </div>
+          <p className="mt-3 font-display text-sm font-bold uppercase tracking-wider text-[#f59e0b]">
+            Juragan Motor Terlengkap Tasikmalaya
+          </p>
+          <p className="mt-0.5 text-xs text-white/45">Jawa Barat — Indonesia · {SITE.brandingLong}</p>
           <p className="mt-4 max-w-md text-sm leading-relaxed text-white/55">
             {SITE.legalName} — dealer jual beli motor baru & bekas berkualitas, tukar tambah,
             pengajuan kredit multi-leasing, dan workshop servis di Kota Tasikmalaya.
@@ -232,6 +248,12 @@ export function Footer() {
           <div className="mt-4 space-y-2 text-sm text-white/55">
             <p className="flex items-start gap-2">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#e11d2e]" /> {SITE.address.full}
+            </p>
+            <p className="flex items-center gap-2">
+              <MessageCircle className="h-4 w-4 shrink-0 text-[#25D366]" />
+              <a href={waLink("Halo Juana Motor Tasikmalaya!")} target="_blank" rel="noopener noreferrer" className="transition hover:text-white hover:underline">
+                WhatsApp: {SITE.whatsappDisplay}
+              </a>
             </p>
             <p className="flex items-center gap-2">
               <Mail className="h-4 w-4 shrink-0 text-[#f59e0b]" /> {SITE.email}
@@ -252,7 +274,9 @@ export function Footer() {
               ["#jual-motor", "Jual Motor"],
               ["#layanan", "Tukar Tambah & Servis"],
               ["#lokasi", "Lokasi Showroom"],
-              ["#faq", "FAQ"],
+              ["#/faq", "FAQ"],
+              ["#/tentang", "Tentang Kami"],
+              ["#/kontak", "Kontak"],
             ].map(([h, l]) => (
               <li key={h}>
                 <a href={h} className="transition hover:text-[#ff4d5a]">{l}</a>
@@ -281,9 +305,28 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10 py-5">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 text-xs text-white/40 md:flex-row md:px-8">
-          <p>© 2026 {SITE.legalName}. Seluruh hak cipta dilindungi.</p>
-          <p>Harga di website bersifat estimasi pasar dan dapat berubah sewaktu-waktu.</p>
+        <div className="mx-auto max-w-7xl space-y-2 px-4 text-xs text-white/40 md:px-8">
+          <div className="flex flex-col items-center justify-between gap-2 md:flex-row">
+            <p>© 2026 {SITE.legalName}. Seluruh hak cipta dilindungi.</p>
+            <p>Harga di website bersifat estimasi pasar dan dapat berubah sewaktu-waktu.</p>
+          </div>
+          <div className="flex flex-col items-center justify-center gap-x-4 gap-y-1 text-center md:flex-row">
+            <p>
+              Design by{" "}
+              <a href={CREDITS.designUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-white/60 transition hover:text-[#f59e0b]">
+                digiman.id
+              </a>{" "}
+              — PT Digital Bisnis Manajemen
+            </p>
+            <span className="hidden text-white/25 md:inline">•</span>
+            <p>
+              Licensing by{" "}
+              <a href={CREDITS.licenseUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-white/60 transition hover:text-[#f59e0b]">
+                PT Top Konsultan Internasional
+              </a>{" "}
+              — topkonsultan.web.id
+            </p>
+          </div>
         </div>
       </div>
     </footer>
