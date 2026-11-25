@@ -56,16 +56,20 @@ export const CREDITS = {
 };
 
 export const BRANDS = [
-  "Honda",
-  "Yamaha",
-  "Suzuki",
-  "Kawasaki",
-  "Bajaj",
-  "TVS",
-  "Gesits",
-  "Volta",
-  "Polytron",
+  "Honda", "Yamaha", "Suzuki", "Kawasaki", "KTM", "Bajaj", "Benelli",
+  "Royal Enfield", "Vespa", "Piaggio", "Aprilia", "Viar", "GPX",
+  "Gesits", "Alva", "Volta", "Uwinfly", "United", "Smoot", "Polytron",
+  "Selis", "Yadea",
 ];
+
+export const BRAND_COUNTRY: Record<string, string> = {
+  Honda: "Jepang", Yamaha: "Jepang", Suzuki: "Jepang", Kawasaki: "Jepang",
+  KTM: "Austria", Bajaj: "India", Benelli: "Italia", "Royal Enfield": "India",
+  Vespa: "Italia", Piaggio: "Italia", Aprilia: "Italia", Viar: "Indonesia",
+  GPX: "Thailand", Gesits: "Indonesia", Alva: "Indonesia", Volta: "Indonesia",
+  Uwinfly: "Indonesia", United: "Indonesia", Smoot: "Indonesia",
+  Polytron: "Indonesia", Selis: "Indonesia", Yadea: "Tiongkok",
+};
 
 export const LEASING_PARTNERS = [
   "Adira Finance",

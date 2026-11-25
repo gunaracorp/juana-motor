@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Preloader from "@/components/juana/preloader";
 import Navbar from "@/components/juana/navbar";
 import Hero from "@/components/juana/hero";
-import Catalog from "@/components/juana/catalog";
+import Catalog, { CatalogPage } from "@/components/juana/catalog";
 import Tools from "@/components/juana/tools";
 import { StatsBar, WhyUs, Services, Testimonials } from "@/components/juana/info";
 import { Location, FAQ, Footer, FloatingActions } from "@/components/juana/contact";
@@ -86,6 +86,7 @@ export default function SiteShell() {
             transition={{ duration: 0.35, ease: "easeOut" }}
           >
             {page === "home" && <HomePage booted={booted} />}
+            {page === "katalog" && <CatalogPage />}
             {page === "faq" && <FaqPage />}
             {page === "tentang" && <TentangPage />}
             {page === "kontak" && <KontakPage />}

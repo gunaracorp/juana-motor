@@ -38,8 +38,8 @@ function Counter({ to, suffix = "", decimals = 0 }: { to: number; suffix?: strin
 
 export function StatsBar() {
   const stats = [
-    { icon: "🏍️", v: 53, suffix: "+", l: "Motor Ready Stock", d: "baru & bekas pilihan" },
-    { icon: "🏭", v: 9, suffix: "", l: "Merk Tersedia", d: "Honda s/d motor listrik" },
+    { icon: "🏍️", v: 379, suffix: "+", l: "Motor Siap Pakai", d: "170 varian baru + 209 unit bekas" },
+    { icon: "🏭", v: 22, suffix: "", l: "Merek Dunia", d: "Honda, Yamaha s/d Vespa & KTM" },
     { icon: "🤝", v: 7, suffix: "+", l: "Mitra Leasing", d: "kredit cair cepat" },
     { icon: "⭐", v: 4.9, suffix: "", l: "Rating Pelanggan", d: "kepuasan showroom", decimals: 1 },
   ];
@@ -73,7 +73,7 @@ const WHY = [
   { icon: ShieldCheck, t: "Unit Terverifikasi", d: "Setiap motor bekas melewati inspeksi 25 titik: mesin, rangka, surat, sampai riwayat servis. Yang tidak lolos, tidak dijual." },
   { icon: BadgePercent, t: "Harga Pasar Transparan", d: "Harga mengikuti pasar Tasikmalaya terkini. Tidak ada biaya siluman, tidak ada nego penjebol kantong." },
   { icon: FileCheck2, t: "Surat Rapi, Dibantu Balik Nama", d: "STNK, BPKB, dan faktur kami cek kelengkapan dan keabsahannya. Balik nama dibantu sampai beres." },
-  { icon: Timer, t: "Kredit Cair 1 Hari", d: "9 merk, 7+ mitra leasing. Data lengkap pagi, motor dibawa pulang sore — pernah praktik." },
+  { icon: Timer, t: "Kredit Cair 1 Hari", d: "22 merek, 7+ mitra leasing. Data lengkap pagi, motor dibawa pulang sore — pernah praktik." },
   { icon: HandCoins, t: "Tukar Tambah Terbaik", d: "Penawaran tukar tambah dihitung fair berdasarkan kondisi unit kamu, bukan tebak-tebakan." },
   { icon: Wrench, t: "Garansi & Servis After", d: "Garansi mesin untuk unit bekas terpilih, ditambah workshop servis KBLI 95299 di dalam showroom." },
 ];

@@ -1,14 +1,18 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
   Calculator, Banknote, Percent, CalendarClock, Send, Loader2, MessageCircle,
-  BadgeDollarSign, HandCoins, ClipboardCheck, FileCheck,
+  BadgeDollarSign, HandCoins, ClipboardCheck, FileCheck, Gauge, ArrowLeftRight, Info,
 } from "lucide-react";
 import { Slider } from "@/components/ui/slider";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { waLink, formatRupiah } from "@/config/site";
+import { BEKAS_MODELS, FAKTOR } from "@/data/penyusutan";
 
 /* ================= SIMULASI KREDIT ================= */
 function AnimatedNumber({ value, prefix = "Rp " }: { value: number; prefix?: string }) {
@@ -30,6 +34,25 @@ function CreditSim() {
   const [dpPersen, setDpPersen] = useState(20);
   const [tenor, setTenor] = useState(24);
   const [bunga, setBunga] = useState(9);
+
+  /* Prefill dari tombol "Simulasi Kredit" di dialog detail motor */
+  useEffect(() => {
+    const apply = (d: { harga?: number } | null | undefined) => {
+      if (d?.harga && d.harga >= 6000000) setHarga(Math.min(d.harga, 450000000));
+    };
+    try {
+      const saved = sessionStorage.getItem("juana:credit-prefill");
+      if (saved) {
+        apply(JSON.parse(saved));
+        sessionStorage.removeItem("juana:credit-prefill");
+      }
+    } catch {}
+    const handler = (e: Event) => {
+      apply((e as CustomEvent).detail as { harga?: number });
+    };
+    window.addEventListener("juana:credit-prefill", handler);
+    return () => window.removeEventListener("juana:credit-prefill", handler);
+  }, []);
 
   const calc = useMemo(() => {
     const dp = Math.round((harga * dpPersen) / 100);
@@ -73,7 +96,7 @@ function CreditSim() {
               <Slider
                 value={[harga]}
                 min={6000000}
-                max={80000000}
+                max={450000000}
                 step={500000}
                 onValueChange={(v) => setHarga(v[0])}
                 className="[&_[data-slot=slider-thumb]]:border-[#e11d2e] [&_[data-slot=slider-range]]:bg-[#e11d2e]"
@@ -157,6 +180,181 @@ function CreditSim() {
             <p className="mt-3 text-[10px] leading-relaxed text-white/40">
               *Simulasi bersifat estimasi. Angsuran final mengikuti skema mitra leasing
               (Adira, BAF, FIF, WOM, Mega Auto, dll) saat pengajuan.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ================= KALKULATOR TUKAR TAMBAH / JUAL BEKAS ================= */
+function round4(n: number) {
+  return Math.round(n / 10000) * 10000;
+}
+
+function BekasCalculator() {
+  const [modelKey, setModelKey] = useState(BEKAS_MODELS[0]?.key ?? "");
+  const [umur, setUmur] = useState(2);
+  const [kondisi, setKondisi] = useState<"Bagus" | "Sedang" | "Kurang">("Bagus");
+
+  const model = BEKAS_MODELS.find((m) => m.key === modelKey) ?? BEKAS_MODELS[0];
+
+  const calc = useMemo(() => {
+    const f = FAKTOR[model.likuiditas];
+    const umurKey = umur <= 5 ? String(umur) : umur <= 7 ? "6-7" : "8-10";
+    const faktorUmur = f.umur[umurKey] ?? 0.4;
+    const faktorKondisi = f.kondisi[kondisi];
+    const nilaiPasar = round4(model.hargaBaruRef * faktorUmur * faktorKondisi);
+    const hargaTerima = round4(nilaiPasar * (1 - f.diskonBeli));
+    const margin = nilaiPasar - hargaTerima;
+    return { faktorUmur, faktorKondisi, nilaiPasar, hargaTerima, margin, diskon: f.diskonBeli, kategori: f.kategori };
+  }, [model, umur, kondisi]);
+
+  const waMsg =
+    `Halo Juana Motor, saya mau jual / tukar tambah motor saya:\n` +
+    `Model: ${model.brand} ${model.label}\n` +
+    `Umur: ${umur} tahun (≈${2026 - umur})\n` +
+    `Kondisi: ${kondisi}\n` +
+    `Estimasi harga terima dari kalkulator: ${formatRupiah(calc.hargaTerima)}\n` +
+    `Mohon penawaran finalnya ya!`;
+
+  return (
+    <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-[#141417] p-6 md:p-8">
+      <div className="absolute -left-24 -top-24 h-56 w-56 rounded-full bg-[#25D366]/10 blur-3xl" />
+      <div className="relative">
+        <div className="mb-6 flex items-center gap-3">
+          <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 shadow-lg shadow-emerald-500/30">
+            <Gauge className="h-5 w-5 text-white" />
+          </span>
+          <div>
+            <h3 className="font-display text-2xl font-bold text-white">Kalkulator Tukar Tambah & Jual Motor</h3>
+            <p className="text-xs text-white/55">Pilih model + umur + kondisi — harga terima showroom terhitung instan (basis riset Nov 2026)</p>
+          </div>
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
+          <div className="space-y-6">
+            <div>
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2 text-white/70"><Gauge className="h-4 w-4 text-emerald-400" /> Model Motor</span>
+                <span className="text-[11px] text-white/45">{BEKAS_MODELS.length} model terlaku</span>
+              </div>
+              <Select value={modelKey} onValueChange={setModelKey}>
+                <SelectTrigger className="w-full rounded-xl border-white/10 bg-[#101013] text-white focus:ring-[#e11d2e]/25">
+                  <SelectValue placeholder="Pilih model motor" />
+                </SelectTrigger>
+                <SelectContent className="max-h-72 border-white/10 bg-[#141417] text-white">
+                  {BEKAS_MODELS.map((m) => (
+                    <SelectItem key={m.key} value={m.key}>
+                      {m.brand} {m.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <p className="mt-1.5 text-[11px] text-white/40">
+                Kategori pasar <strong className="text-white/60">{model.likuiditas}</strong> — {calc.kategori}
+              </p>
+            </div>
+
+            <div>
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2 text-white/70"><CalendarClock className="h-4 w-4 text-emerald-400" /> Umur Motor</span>
+                <span className="font-semibold text-white">{umur} tahun</span>
+              </div>
+              <Slider
+                value={[umur]}
+                min={1}
+                max={10}
+                step={1}
+                onValueChange={(v) => setUmur(v[0])}
+                className="[&_[data-slot=slider-thumb]]:border-emerald-500 [&_[data-slot=slider-range]]:bg-emerald-500"
+              />
+              <div className="mt-1 flex justify-between text-[10px] text-white/35">
+                <span>1 thn</span><span>5 thn</span><span>10 thn</span>
+              </div>
+            </div>
+
+            <div>
+              <div className="mb-2 flex items-center justify-between text-sm">
+                <span className="flex items-center gap-2 text-white/70"><ClipboardCheck className="h-4 w-4 text-emerald-400" /> Kondisi Fisik</span>
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {(["Bagus", "Sedang", "Kurang"] as const).map((k) => (
+                  <button
+                    key={k}
+                    onClick={() => setKondisi(k)}
+                    className={`rounded-full px-4 py-1.5 text-xs font-semibold transition-all ${
+                      kondisi === k
+                        ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30 scale-105"
+                        : "border border-white/15 bg-white/5 text-white/60 hover:text-white"
+                    }`}
+                  >
+                    {k}
+                  </button>
+                ))}
+              </div>
+              <p className="mt-2 text-[11px] leading-relaxed text-white/40">
+                Bagus = cat mulus & mesin original · Sedang = normal pemakaian · Kurang = perlu rekondisi.
+                Km jauh / servis liar / surat bermasalah dikurangi 5-15% lagi saat inspeksi.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex flex-col rounded-2xl border border-emerald-500/25 bg-gradient-to-br from-emerald-500/10 to-transparent p-5">
+            <p className="text-xs uppercase tracking-widest text-white/55">Nilai Pasar Bekas (est.)</p>
+            <motion.span
+              key={calc.nilaiPasar}
+              initial={{ opacity: 0.35, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.28 }}
+              className="mt-1 inline-block font-display text-2xl font-bold text-white md:text-3xl"
+            >
+              {formatRupiah(calc.nilaiPasar)}
+            </motion.span>
+
+            <div className="mt-4 space-y-2.5 border-t border-white/10 pt-4 text-sm">
+              {[
+                { l: "Harga baru referensi", v: formatRupiah(model.hargaBaruRef) },
+                { l: `Faktor umur ${umur} thn`, v: `${Math.round(calc.faktorUmur * 100)}%` },
+                { l: `Faktor kondisi ${kondisi}`, v: `${Math.round(calc.faktorKondisi * 100)}%` },
+              ].map((r) => (
+                <div key={r.l} className="flex items-center justify-between">
+                  <span className="text-white/55">{r.l}</span>
+                  <span className="text-white/80">{r.v}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-4 rounded-xl border border-white/10 bg-white/5 p-4">
+              <p className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider text-white/50">
+                <ArrowLeftRight className="h-3.5 w-3.5 text-[#f59e0b]" /> Harga Terima Showroom — beli tunai / tukar tambah
+              </p>
+              <motion.p
+                key={calc.hargaTerima}
+                initial={{ opacity: 0.35, y: 4 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.28 }}
+                className="mt-1 font-display text-2xl font-bold text-[#f59e0b] md:text-3xl"
+              >
+                {formatRupiah(calc.hargaTerima)}
+              </motion.p>
+              <p className="mt-1 text-[10px] text-white/40">
+                Sudah termasuk akuisisi showroom {Math.round(calc.diskon * 100)}% (rekondisi, iklan & garansi).
+              </p>
+            </div>
+
+            <a
+              href={waLink(waMsg)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-4 flex items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3 text-sm font-bold text-[#06250f] transition hover:brightness-110"
+            >
+              <Send className="h-4 w-4" /> Ajukan Harga via WhatsApp
+            </a>
+            <p className="mt-3 flex items-start gap-1.5 text-[10px] leading-relaxed text-white/40">
+              <Info className="mt-0.5 h-3 w-3 shrink-0" />
+              *Estimasi berbasis tabel penyusutan master Juana Motor (kalibrasi pasar Nov 2026). Harga final setelah inspeksi 25 titik di showroom.
             </p>
           </div>
         </div>
@@ -303,12 +501,17 @@ export default function Tools() {
             HITUNG, <span className="text-stroke-red">JUAL</span>, TRANSAKSI
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-white/60 md:text-base">
-            Simulasi kredit transparan dan pengajuan jual motor langsung tersimpan di sistem kami.
+            Simulasi kredit transparan, kalkulator tukar tambah berbasis data master, dan pengajuan jual motor langsung tersimpan di sistem kami.
           </p>
         </motion.div>
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <CreditSim />
         </motion.div>
+        <div id="kalkulator-bekas" className="mt-10 scroll-mt-24">
+          <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <BekasCalculator />
+          </motion.div>
+        </div>
         <div id="jual-motor" className="mt-10 scroll-mt-24">
           <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <SellForm />

@@ -61,8 +61,9 @@ function Embers() {
 }
 
 const TICKER = [
-  "HONDA", "YAMAHA", "SUZUKI", "KAWASAKI", "BAJAJ", "TVS",
-  "READY KREDIT", "TUKAR TAMBAH", "MOTOR BEKAS BERKUALITAS", "GARANSI MESIN", "SIAP ANTAR",
+  "HONDA", "YAMAHA", "SUZUKI", "KAWASAKI", "KTM", "ROYAL ENFIELD", "VESPA",
+  "BENELLI", "APRILIA", "BAJAJ", "PIAGGIO", "GPX", "MOTOR LISTRIK",
+  "379 UNIT SIAP", "READY KREDIT", "TUKAR TAMBAH", "GARANSI MESIN", "SIAP ANTAR",
 ];
 
 export default function Hero({ booted = false }: { booted?: boolean }) {
@@ -170,9 +171,9 @@ export default function Hero({ booted = false }: { booted?: boolean }) {
             className="mt-9 grid max-w-lg grid-cols-3 divide-x divide-white/10 rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur"
           >
             {[
-              { v: "50+", l: "Unit Ready" },
-              { v: "9", l: "Merk Tersedia" },
-              { v: "2020", l: "Berdiri Sejak" },
+              { v: "379", l: "Unit & Varian" },
+              { v: "22", l: "Merek Dunia" },
+              { v: "6 Thn", l: "Pengalaman Sejak 2020" },
             ].map((s) => (
               <div key={s.l} className="px-4 py-3 text-center">
                 <div className="font-display text-2xl font-bold text-[#f59e0b]">{s.v}</div>

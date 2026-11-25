@@ -11,15 +11,16 @@ import { goPage, PageKey } from "@/config/nav";
 
 const LINKS = [
   { href: "#beranda", label: "Beranda" },
-  { href: "#katalog", label: "Katalog" },
+  { href: "#/katalog", label: "Katalog 379 Motor" },
   { href: "#motor-bekas", label: "Motor Bekas" },
   { href: "#kredit", label: "Simulasi Kredit" },
+  { href: "#kalkulator-bekas", label: "Cek Harga Bekas" },
   { href: "#jual-motor", label: "Jual Motor" },
-  { href: "#layanan", label: "Layanan" },
   { href: "#lokasi", label: "Lokasi" },
 ];
 
 const PAGES: { page: PageKey; label: string; desc: string }[] = [
+  { page: "katalog", label: "Katalog Lengkap", desc: "379 motor — 22 merek dunia" },
   { page: "faq", label: "FAQ", desc: "Pertanyaan yang sering diajukan" },
   { page: "tentang", label: "Tentang Kami", desc: "Profil & legalitas sejak 2020" },
   { page: "kontak", label: "Kontak", desc: "WhatsApp, email & peta lokasi" },

@@ -3,10 +3,11 @@
 // Semua halaman dirender di dalam route "/" sesuai arsitektur
 // ============================================================
 
-export type PageKey = "home" | "faq" | "tentang" | "kontak" | "tips" | "promo" | "legal";
+export type PageKey = "home" | "katalog" | "faq" | "tentang" | "kontak" | "tips" | "promo" | "legal";
 
 export const PAGE_META: Record<PageKey, { title: string; kicker: string }> = {
   home: { title: "Beranda", kicker: "Beranda" },
+  katalog: { title: "Katalog Lengkap — 379 Motor", kicker: "Katalog" },
   faq: { title: "FAQ — Pertanyaan yang Sering Diajukan", kicker: "Tanya Jawab" },
   tentang: { title: "Tentang Kami", kicker: "Profil Showroom" },
   kontak: { title: "Kontak", kicker: "Hubungi Kami" },
@@ -25,7 +26,7 @@ export function parseHash(hash: string): { page: PageKey; anchor: string | null 
   const h = hash.replace(/^#/, "");
   if (h.startsWith("/")) {
     const name = h.slice(1).split("?")[0].replace(/\/$/, "");
-    const valid: PageKey[] = ["home", "faq", "tentang", "kontak", "tips", "promo", "legal"];
+    const valid: PageKey[] = ["home", "katalog", "faq", "tentang", "kontak", "tips", "promo", "legal"];
     if (name && valid.includes(name as PageKey)) return { page: name as PageKey, anchor: null };
     return { page: "home", anchor: null };
   }
