@@ -1,0 +1,48 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Motorcycle {
+  id           String   @id @default(cuid())
+  name         String
+  brand        String
+  category     String // matic | sport | bebek | trail | retro | bigbike | elektrik
+  condition    String // baru | bekas
+  year         Int
+  engineCc     Int
+  transmission String
+  fuelType     String
+  color        String
+  price        Int // harga OTR motor baru (Rp)
+  priceMin     Int? // harga min motor bekas (Rp)
+  priceMax     Int? // harga max motor bekas (Rp)
+  image        String
+  badge        String? // TERLARIS | BARU | HOT | PREMIUM | ECO
+  stock        Int      @default(1)
+  mileageKm    Int? // khusus bekas
+  grade        String? // khusus bekas: A / B
+  specs        String // JSON: {power, tank, weight, brake, ...}
+  description  String
+  featured     Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Inquiry {
+  id          String   @id @default(cuid())
+  type        String // jual-motor | kontak | trade-in
+  name        String
+  phone       String
+  bikeDetail  String
+  year        Int?
+  mileageKm   Int?
+  expectPrice Int?
+  message     String?
+  status      String   @default("baru")
+  createdAt   DateTime @default(now())
+}
