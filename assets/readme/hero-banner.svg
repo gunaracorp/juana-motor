@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 480" width="1600" height="480" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0B0B13"/>
+      <stop offset="0.5" stop-color="#15151F"/>
+      <stop offset="1" stop-color="#0B0B13"/>
+    </linearGradient>
+    <linearGradient id="rg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C93E0F"/>
+      <stop offset="0.55" stop-color="#F4581C"/>
+      <stop offset="1" stop-color="#FF7A2F"/>
+    </linearGradient>
+    <linearGradient id="goldg" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#B8860B"/>
+      <stop offset="0.5" stop-color="#E8B44A"/>
+      <stop offset="1" stop-color="#F5D06F"/>
+    </linearGradient>
+    <linearGradient id="fadeL" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0B0B13" stop-opacity="0.9"/>
+      <stop offset="0.25" stop-color="#0B0B13" stop-opacity="0"/>
+      <stop offset="0.75" stop-color="#0B0B13" stop-opacity="0"/>
+      <stop offset="1" stop-color="#0B0B13" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="blurBig" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+    <filter id="blurSoft" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="5"/>
+    </filter>
+    <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#FFFFFF" stroke-opacity="0.04"/>
+    </pattern>
+    <pattern id="checker" width="28" height="28" patternUnits="userSpaceOnUse">
+      <rect width="14" height="14" fill="#F4581C"/>
+      <rect x="14" y="14" width="14" height="14" fill="#F4581C"/>
+      <rect x="14" width="14" height="14" fill="#1A1A26"/>
+      <rect y="14" width="14" height="14" fill="#1A1A26"/>
+    </pattern>
+    <path id="ringPath" d="M -62,0 A 62,62 0 1,1 62,0 A 62,62 0 1,1 -62,0" fill="none"/>
+  </defs>
+
+  <style>
+    .sl  { animation: slide 5.5s linear infinite; }
+    .sl2 { animation: slide 8.5s linear infinite; opacity: .55; }
+    .sl3 { animation: slide 3.2s linear infinite; opacity: .3; }
+    @keyframes slide { from { transform: translateX(0); } to { transform: translateX(-1600px); } }
+    .glowT { animation: pulseGlow 2.6s ease-in-out infinite; }
+    @keyframes pulseGlow { 0%,100% { opacity:.25; } 50% { opacity:.9; } }
+    .ck { animation: shift .7s linear infinite; }
+    @keyframes shift { to { transform: translateX(-28px); } }
+    .shine { animation: shineMove 2.8s ease-in-out infinite; }
+    @keyframes shineMove { 0% { opacity:0; } 15% { opacity:.85; } 85% { opacity:.85; } 100% { opacity:0; } }
+  </style>
+
+  <!-- background -->
+  <rect width="1600" height="480" fill="url(#bg)"/>
+  <rect width="1600" height="480" fill="url(#grid)"/>
+  <ellipse cx="800" cy="250" rx="560" ry="180" fill="#F4581C" opacity="0.13" filter="url(#blurBig)">
+    <animate attributeName="opacity" values="0.09;0.18;0.09" dur="4s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="1310" cy="130" rx="150" ry="120" fill="#E8B44A" opacity="0.10" filter="url(#blurBig)"/>
+
+  <!-- speed lines (3 layers, seamless loop) -->
+  <g stroke-linecap="round">
+    <g class="sl3">
+      <rect x="120"  y="70"  width="460" height="5" rx="2.5" fill="#FF7A2F"/>
+      <rect x="780"  y="130" width="340" height="4" rx="2"   fill="#E8B44A"/>
+      <rect x="300"  y="395" width="420" height="5" rx="2.5" fill="#FF7A2F"/>
+      <rect x="980"  y="430" width="300" height="4" rx="2"   fill="#FFFFFF"/>
+      <rect x="1350" y="90"  width="380" height="5" rx="2.5" fill="#F4581C"/>
+      <rect x="1500" y="360" width="330" height="4" rx="2"   fill="#E8B44A"/>
+      <rect x="1720" y="70"  width="460" height="5" rx="2.5" fill="#FF7A2F"/>
+      <rect x="2380" y="130" width="340" height="4" rx="2"   fill="#E8B44A"/>
+      <rect x="1900" y="395" width="420" height="5" rx="2.5" fill="#FF7A2F"/>
+      <rect x="2580" y="430" width="300" height="4" rx="2"   fill="#FFFFFF"/>
+      <rect x="2950" y="90"  width="380" height="5" rx="2.5" fill="#F4581C"/>
+      <rect x="3100" y="360" width="330" height="4" rx="2"   fill="#E8B44A"/>
+    </g>
+    <g class="sl">
+      <rect x="60"   y="200" width="240" height="4" rx="2" fill="#FFFFFF"/>
+      <rect x="520"  y="105" width="300" height="4" rx="2" fill="#F4581C"/>
+      <rect x="640"  y="330" width="260" height="4" rx="2" fill="#E8B44A"/>
+      <rect x="1130" y="235" width="330" height="4" rx="2" fill="#FFFFFF"/>
+      <rect x="1270" y="60"  width="220" height="4" rx="2" fill="#F4581C"/>
+      <rect x="1660" y="200" width="240" height="4" rx="2" fill="#FFFFFF"/>
+      <rect x="2120" y="105" width="300" height="4" rx="2" fill="#F4581C"/>
+      <rect x="2240" y="330" width="260" height="4" rx="2" fill="#E8B44A"/>
+      <rect x="2730" y="235" width="330" height="4" rx="2" fill="#FFFFFF"/>
+      <rect x="2870" y="60"  width="220" height="4" rx="2" fill="#F4581C"/>
+    </g>
+    <g class="sl2">
+      <rect x="210"  y="150" width="380" height="3" rx="1.5" fill="#FF7A2F"/>
+      <rect x="830"  y="275" width="420" height="3" rx="1.5" fill="#E8B44A"/>
+      <rect x="1440" y="185" width="360" height="3" rx="1.5" fill="#FFFFFF"/>
+      <rect x="190"  y="310" width="330" height="3" rx="1.5" fill="#F4581C"/>
+      <rect x="1810" y="150" width="380" height="3" rx="1.5" fill="#FF7A2F"/>
+      <rect x="2430" y="275" width="420" height="3" rx="1.5" fill="#E8B44A"/>
+      <rect x="3040" y="185" width="360" height="3" rx="1.5" fill="#FFFFFF"/>
+      <rect x="1790" y="310" width="330" height="3" rx="1.5" fill="#F4581C"/>
+    </g>
+  </g>
+
+  <!-- checkered flag strip bottom (animated) -->
+  <g class="ck" opacity="0.95">
+    <rect x="-28" y="452" width="1656" height="28" fill="url(#checker)"/>
+  </g>
+  <rect x="0" y="448" width="1600" height="4" fill="url(#rg)"/>
+
+  <!-- top hairline -->
+  <rect x="0" y="0" width="1600" height="4" fill="url(#rg)"/>
+
+  <!-- kicker -->
+  <text x="800" y="128" text-anchor="middle" font-size="26" font-weight="bold" letter-spacing="7" fill="#E8B44A">★ PUSAT JUAL BELI MOTOR TERLENGKAP ★</text>
+  <rect x="530" y="148" width="220" height="3" rx="1.5" fill="url(#goldg)" opacity="0.8"/>
+  <rect x="850" y="148" width="220" height="3" rx="1.5" fill="url(#goldg)" opacity="0.8"/>
+
+  <!-- main title: glow layer + crisp layer (MOTOR = putih bersinar) -->
+  <g font-size="118" font-weight="900" text-anchor="middle" letter-spacing="4">
+    <text class="glowT" x="800" y="272" fill="#FFFFFF" filter="url(#blurBig)">JUANA MOTOR</text>
+    <text x="800" y="272" fill="#FFFFFF">JUANA <tspan filter="url(#blurSoft)">MOTOR</tspan></text>
+  </g>
+
+  <!-- racing stripe with moving shine -->
+  <rect x="500" y="300" width="600" height="10" rx="5" fill="url(#rg)"/>
+  <rect class="shine" x="510" y="301" width="90" height="8" rx="4" fill="#FFFFFF" filter="url(#blurSoft)">
+    <animate attributeName="x" values="510;990;510" dur="2.8s" repeatCount="indefinite"/>
+  </rect>
+
+  <!-- subtitle -->
+  <text x="800" y="362" text-anchor="middle" font-size="23" font-weight="bold" letter-spacing="5" fill="#D9D9E6">TASIKMALAYA — JAWA BARAT • INDONESIA • SEJAK 2020</text>
+  <text x="800" y="404" text-anchor="middle" font-size="18" letter-spacing="2" fill="#8B8BA0">Baru Mulus  •  Bekas Berkualitas  •  Kredit dibantu sampai Approval  •  Tukar Tambah Semua Merek</text>
+
+  <!-- rotating ring badge -->
+  <g transform="translate(1352,132)">
+    <circle r="86" fill="#101018" stroke="#E8B44A" stroke-opacity="0.5" stroke-width="1.5"/>
+    <circle r="64" fill="none" stroke="#F4581C" stroke-opacity="0.35" stroke-width="1"/>
+    <g>
+      <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="16s" repeatCount="indefinite"/>
+      <text font-size="15" font-weight="bold" letter-spacing="4.5" fill="#E8B44A">
+        <textPath href="#ringPath">TERLENGKAP ★ TERBAIK ★ TERPERCAYA ★ SEJAK 2020 ★</textPath>
+      </text>
+    </g>
+    <polygon points="0,-26 6,-8 25,-8 10,3 15,21 0,10 -15,21 -10,3 -25,-8 -6,-8" fill="#F4581C">
+      <animate attributeName="opacity" values="1;0.55;1" dur="2s" repeatCount="indefinite"/>
+    </polygon>
+  </g>
+
+  <!-- vignette -->
+  <rect width="1600" height="480" fill="url(#fadeL)"/>
+</svg>

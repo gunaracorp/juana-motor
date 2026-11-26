@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 84" width="1000" height="84" font-family="Arial, Helvetica, sans-serif">
+  <style>
+    .t { opacity: 0; animation: fade 16s linear infinite; }
+    .t2 { animation-delay: 4s; }
+    .t3 { animation-delay: 8s; }
+    .t4 { animation-delay: 12s; }
+    @keyframes fade { 0% {opacity:0;} 3% {opacity:1;} 22% {opacity:1;} 27% {opacity:0;} 100% {opacity:0;} }
+    .bar { animation: barPulse 1.4s ease-in-out infinite; }
+    @keyframes barPulse { 0%,100% { opacity:.45; } 50% { opacity:1; } }
+  </style>
+  <rect width="1000" height="84" fill="#0F0F17"/>
+  <rect x="0" y="0" width="1000" height="2" fill="#F4581C" opacity="0.6"/>
+  <rect x="0" y="82" width="1000" height="2" fill="#F4581C" opacity="0.6"/>
+  <rect class="bar" x="60" y="34" width="8" height="16" rx="3" fill="#F4581C"/>
+  <g font-size="27" font-weight="bold" fill="#EDEDF5" text-anchor="middle" letter-spacing="1">
+    <text class="t"  x="522" y="60">Baru Mulus — Bekas Pasti Berkualitas</text>
+    <text class="t t2" x="522" y="60">Harga Jujur, Nego Sama Juragan Langsung</text>
+    <text class="t t3" x="522" y="60">Kredit Dibantu Sampai Approval — 7 Leasing Partner</text>
+    <text class="t t4" x="522" y="60">Tukar Tambah Semua Merek — Proses Cepat</text>
+  </g>
+</svg>
